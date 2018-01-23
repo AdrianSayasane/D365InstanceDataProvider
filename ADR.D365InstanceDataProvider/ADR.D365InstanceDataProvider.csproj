@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Retrieve.cs" />
     <Compile Include="RetrieveMultiple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
