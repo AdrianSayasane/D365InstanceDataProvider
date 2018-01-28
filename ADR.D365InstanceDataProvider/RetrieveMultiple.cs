@@ -22,9 +22,6 @@ namespace ADR.D365InstanceDataProvider
 
             QueryExpression query = context.InputParameterOrDefault<QueryExpression>("Query");
             var metadataHelper = new MetadataHelper(service, query.EntityName);
-            
-            ColumnSet cols = new ColumnSet("adr_accountname", "adr_accountpassword","adr_region", "adr_instancename", "adr_region");
-            var datasource = service.Retrieve("adr_d365datasource", metadataHelper.GetDatasourceId(), cols);
             CrmServiceClient externalCrmService = ExternalD365ServiceHelper.GetServiceClient(service, metadataHelper);
 
             var externalResults = externalCrmService.RetrieveMultiple(Mapper.MapQuery(metadataHelper, query));
