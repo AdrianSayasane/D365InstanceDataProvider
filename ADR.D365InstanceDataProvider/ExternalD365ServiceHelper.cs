@@ -13,7 +13,7 @@ namespace ADR.D365InstanceDataProvider
     {
         public static CrmServiceClient GetServiceClient(IOrganizationService service, MetadataHelper metadataHelper)
         {
-            ColumnSet cols = new ColumnSet("adr_accountname", "adr_accountpassword", "adr_region", "adr_instancename", "adr_region");
+            ColumnSet cols = new ColumnSet("adr_accountname", "adr_accountpassword", "adr_region", "adr_instancename");
             var datasource = service.Retrieve("adr_d365datasource", metadataHelper.GetDatasourceId(), cols);
             CrmServiceClient externalCrmService = new CrmServiceClient(
                 datasource["adr_accountname"].ToString(),
