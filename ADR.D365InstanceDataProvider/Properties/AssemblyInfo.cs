@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ADR.D365InstanceDataProvider")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A custom data provider to connect to D365 Online as a virtual entity data source")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Adrian Sayasane")]
 [assembly: AssemblyProduct("ADR.D365InstanceDataProvider")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
