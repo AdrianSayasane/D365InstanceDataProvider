@@ -1,13 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Data.Exceptions;
 using Microsoft.Xrm.Sdk.Extensions;
 using Microsoft.Xrm.Sdk.Query;
-using Microsoft.Xrm.Tooling.Connector;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ADR.D365InstanceDataProvider
 {
@@ -22,7 +16,7 @@ namespace ADR.D365InstanceDataProvider
 
             QueryExpression query = context.InputParameterOrDefault<QueryExpression>("Query");
             var metadataHelper = new MetadataHelper(service, query.EntityName);
-            CrmServiceClient externalCrmService = ExternalD365ServiceHelper.GetServiceClient(service, metadataHelper);
+            IOrganizationService externalCrmService = ExternalD365ServiceHelper.GetOrgWebProxyClient(service, metadataHelper);
 
             var externalResults = externalCrmService.RetrieveMultiple(Mapper.MapQuery(metadataHelper, query));
             var results = Mapper.MapExternalResults(metadataHelper, externalResults);
