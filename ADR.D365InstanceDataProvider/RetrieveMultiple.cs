@@ -16,7 +16,7 @@ namespace ADR.D365InstanceDataProvider
 
             QueryExpression query = context.InputParameterOrDefault<QueryExpression>("Query");
             var metadataHelper = new MetadataHelper(service, query.EntityName);
-            IOrganizationService externalCrmService = ExternalD365ServiceHelper.GetOrgWebProxyClient(service, metadataHelper);
+            IOrganizationService externalCrmService = ExternalD365ServiceHelper.GetOrgWebProxyClient(service, metadataHelper.GetDatasourceId());
 
             var externalResults = externalCrmService.RetrieveMultiple(Mapper.MapQuery(metadataHelper, query));
             var results = Mapper.MapExternalResults(metadataHelper, externalResults);

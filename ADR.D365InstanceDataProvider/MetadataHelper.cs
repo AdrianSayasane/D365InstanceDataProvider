@@ -26,11 +26,11 @@ namespace ADR.D365InstanceDataProvider
             EntityMetadata = res.EntityMetadata;
         }
 
+        public Guid GetDatasourceId() => EntityMetadata.DataSourceId.Value;
+
         public string GetEntityName() => EntityMetadata.LogicalName;
 
         public string GetAttributeName(string externalAttributeName) => EntityMetadata.Attributes.FirstOrDefault(x => x.ExternalName == externalAttributeName).LogicalName;
-
-        public Guid GetDatasourceId() => EntityMetadata.DataSourceId.Value;
 
         public string GetExternalEntityName() => EntityMetadata.ExternalName;
 

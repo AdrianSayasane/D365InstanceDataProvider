@@ -12,17 +12,17 @@ namespace ADR.D365InstanceDataProvider
 {
     public class ExternalD365ServiceHelper
     {
-        public static OrganizationWebProxyClient GetOrgWebProxyClient(IOrganizationService service, MetadataHelper metadataHelper)
+        public static OrganizationWebProxyClient GetOrgWebProxyClient(IOrganizationService service, Guid datasourceId)
         {
-            ColumnSet cols = new ColumnSet("adr_orgserviceurl", "adr_clientId", "adr_secret", "adr_resourceId", "adr_tenantId");
-            var datasource = service.Retrieve("adr_d365datasource", metadataHelper.GetDatasourceId(), cols);
-            var uri = new Uri(datasource["adr_clientId"].ToString() + "/web?SdkClientVersion=9.0.0.0");
+            ColumnSet cols = new ColumnSet("adr_orgurl", "adr_clientId", "adr_secret", "adr_resourceId", "adr_tenantId");
+            var datasource = service.Retrieve("adr_d365datasource", datasourceId, cols);
+            var uri = new Uri(datasource["adr_orgserviceurl"].ToString() + "/web?SdkClientVersion=9.0.0.0");
 
             Task<AzureAccessToken> token = CreateOAuthAuthorizationToken(
-                datasource["adr_clientId"].ToString(), 
+                datasource["adr_clientid"].ToString(), 
                 datasource["adr_secret"].ToString(), 
-                datasource["adr_resourceId"].ToString(), 
-                datasource["adr_tenantId"].ToString());
+                datasource["adr_resourceid"].ToString(), 
+                datasource["adr_tenantid"].ToString());
 
             var proxy = new OrganizationWebProxyClient(uri, false);
             proxy.HeaderToken = token.Result.access_token;
@@ -48,6 +48,7 @@ namespace ADR.D365InstanceDataProvider
                     token = (AzureAccessToken)serializer.ReadObject(json);
                 }
             }
+
             return token;
         }
     }

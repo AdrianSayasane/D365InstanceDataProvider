@@ -28,7 +28,7 @@ namespace ADR.D365InstanceDataProvider
             EntityReference target = (EntityReference)context.InputParameters["Target"];
             ColumnSet entityCols = (ColumnSet)context.InputParameters["ColumnSet"];
             var metadataHelper = new MetadataHelper(service, target.LogicalName);
-            IOrganizationService externalCrmService = ExternalD365ServiceHelper.GetOrgWebProxyClient(service, metadataHelper);
+            IOrganizationService externalCrmService = ExternalD365ServiceHelper.GetOrgWebProxyClient(service, metadataHelper.GetDatasourceId());
             
             if(entityCols != null)
             {
